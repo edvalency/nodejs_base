@@ -10,10 +10,10 @@ const server = app.listen(config.port, () => {
 });
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-  console.error(`Error: ${err.message}`);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-});
+// process.on('unhandledRejection', (err) => {
+//   console.error(`Ind Error: ${err.message}`);
+//   // Close server & exit process
+//   server.close(() => process.exit(1));
+// });
 
 module.exports = server;
