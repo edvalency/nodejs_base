@@ -26,7 +26,7 @@ const errorHandler = (err, req, res, next) => {
     error.statusCode = 400;
   }
 
-  res.status(error.statusCode || 500).json({
+  res.writeHead(error.statusCode || 500).json({
     status: 'error',
     message: error.message || 'Server Error',
     ...(process.env.NODE_ENV === 'development' && { stack: err.stack })

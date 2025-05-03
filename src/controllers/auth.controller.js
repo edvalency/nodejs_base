@@ -65,7 +65,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
-  res.status(200).json({
+  res.writeHead(200).json({
     status: 'success',
     data: {
       user
@@ -79,7 +79,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
  * @access  Private
  */
 exports.logout = asyncHandler(async (req, res, next) => {
-  res.status(200).json({
+  res.writeHead(200).json({
     status: 'success',
     data: {}
   });

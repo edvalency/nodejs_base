@@ -35,7 +35,7 @@ app.use('/api', limiter);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'success', message: 'Server is running' });
+  res.writeHead(200).json({ status: 'success', message: 'Server is running' });
 });
 
 // API routes
@@ -43,7 +43,7 @@ app.use('/api/v1', apiRoutes);
 
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({
+  res.writeHead(404).json({
     status: 'error',
     message: `Can't find ${req.originalUrl} on this server!`
   });

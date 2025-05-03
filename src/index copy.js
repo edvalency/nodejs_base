@@ -27,10 +27,10 @@ app.get('/uploadUser', function (req, res) {
 app.post('/uploadSuccessful', urlencodedParser, async (req, res) => {
 	try {
 		await sql`INSERT INTO Users (Id, Name, Email) VALUES (${req.body.user_id}, ${req.body.name}, ${req.body.email});`;
-		res.status(200).send('<h1>User added successfully</h1>');
+		res.writeHead(200).send('<h1>User added successfully</h1>');
 	} catch (error) {
 		console.error(error);
-		res.status(500).send('Error adding user');
+		res.writeHead(500).send('Error adding user');
 	}
 });
 
@@ -49,7 +49,7 @@ app.get('/allUsers', async (req, res) => {
 				)
 				.join('');
 
-			res.status(200).send(`
+			res.writeHead(200).send(`
                 <html>
                     <head>
                         <title>Users</title>
@@ -99,11 +99,11 @@ app.get('/allUsers', async (req, res) => {
                 </html>
             `);
 		} else {
-			res.status(404).send('Users not found');
+			res.writeHead(404).send('Users not found');
 		}
 	} catch (error) {
 		console.error(error);
-		res.status(500).send('Error retrieving users');
+		res.writeHead(500).send('Error retrieving users');
 	}
 });
 

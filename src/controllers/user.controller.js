@@ -10,13 +10,14 @@ const asyncHandler = require('../utils/asyncHandler');
 exports.getUsers = asyncHandler(async (req, res, next) => {
   const users = await User.find();
 
-  res.status(200).json({
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({
     status: 'success',
     count: users.length,
     data: {
       users
     }
-  });
+  }));
 });
 
 /**
@@ -31,7 +32,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
     return next(new AppError(`User not found with id of ${req.params.id}`, 404));
   }
 
-  res.status(200).json({
+  res.writeHead(200).json({
     status: 'success',
     data: {
       user
@@ -47,7 +48,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 exports.createUser = asyncHandler(async (req, res, next) => {
   const user = await User.create(req.body);
 
-  res.status(201).json({
+  res.writeHead(201).json({
     status: 'success',
     data: {
       user
@@ -70,7 +71,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
     return next(new AppError(`User not found with id of ${req.params.id}`, 404));
   }
 
-  res.status(200).json({
+  res.writeHead(200).json({
     status: 'success',
     data: {
       user
@@ -90,7 +91,7 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
     return next(new AppError(`User not found with id of ${req.params.id}`, 404));
   }
 
-  res.status(200).json({
+  res.writeHead(200).json({
     status: 'success',
     data: {}
   });
